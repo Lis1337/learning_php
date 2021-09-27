@@ -8,15 +8,17 @@
     <title>Document</title>
 </head>
 <body>
-<?php
-$path = __DIR__;
-$photos = [1 => '1.png', 2 => '2.png', 3 => '3.png', 4 => '4.png'];
-/* foreach ($photos as $photo) {
-    ?><img src="<?php echo $photo;?>">
-<?php
-}  */
-?>
+<p>
+<form action="upload.php" method="post" enctype="multipart/form-data">
+    <input type="file" name="photo">
+    <button type="submit">Upload</button>
+</form>
+</p>
 
-
+<p>
+<form action="show_gallery.php" method="get" enctype="text/plain">
+    <button type="submit">Show gallery</button>
+</form>
+</p>
 </body>
 </html>

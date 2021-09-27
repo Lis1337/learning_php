@@ -25,6 +25,7 @@ function read_guest_book() {
 
 
 <?php
+$line_num = 3;
 function add_record_guest_book($line_num) {
     $path = __DIR__ . '/guest_book.txt';
     $write_file = fopen($path, 'a');
@@ -32,7 +33,8 @@ function add_record_guest_book($line_num) {
 
     if (is_writeable('guest_book.txt')) {
         fwrite($write_file, $record_text);
-        $line_num = $line_num + 1;
+        static $line_num =  3;
+        $line_num += 1;
         fclose($write_file);
         echo 'record successfully added';
     } else {
