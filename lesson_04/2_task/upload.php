@@ -9,14 +9,19 @@ if (isset($files_photo)) {
                 $files_photo['tmp_name'],
                 __DIR__ . "/photos/$name.png"
             );
-            echo 'Upload successful';
-        } else {
+            echo 'Upload successful'; ?>
+<form action="show_gallery.php" method="get">
+    <button>
+        <label>
+            Показать галлерею
+        </label>
+    </button>
+</form>
+        <?php
+        }
+    else {
             echo 'please, use another file format';
         }
     }
 }
-/*array(1)
-{ ["photo"]=> array(5)
-{ ["name"]=> string(5) "1.png" ["type"]=> string(9) "image/png" ["tmp_name"]=> string(14)
- "/tmp/phpKM9ySR" ["error"]=> int(0) ["size"]=> int(76436) }
-} */
+?>

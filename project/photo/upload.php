@@ -1,22 +1,41 @@
 <?php
-$files_photo = $_FILES['photo'];
-$name = $_FILES['photo']['name'];
+include '../auth/main.php';
 
-if (isset($files_photo)) {
-    if (0 == $files_photo['error']) {
-        if (in_array($files_photo['type'], array('image/jpeg', 'image/png'))) {
+$filesPhoto = $_FILES['photo'];
+$name = $filesPhoto['name'];
+
+if (isset($filesPhoto)) {
+    if (0 == $filesPhoto['error']) {
+        if (in_array($filesPhoto['type'], array('image/jpeg', 'image/png'))) {
             move_uploaded_file(
-                $files_photo['tmp_name'],
-                __DIR__ . "/photos/$name.png"
+                    $filesPhoto['tmp_name'],
+                    __DIR__ . "/photos/$name.png"
             );
+
+            $logFile = __DIR__ . '../logs/log1.txt';
+            if (is_writeable('log1.txt')) {
+                $logText =
+                    'photo: ' . $name .
+                    'added by: ' . getCurrentUser() .
+                    'at: ' . time('d.m.y');
+                fopen($logFile, 'rw');
+                fwrite($logFile, $logText);
+                fclose($logFile);
             echo 'Upload successful';
-        } else {
-            echo 'please, use another file format';
+            ?>
+
+            <form action="show_gallery.php" method="get">
+                <button>
+                    <label>
+                        Показать галлерею
+                    </label>
+                </button>
+            </form>
+
+            <?php
+        }
+        else {echo 'please, use another file format';}
         }
     }
 }
-/*array(1)
-{ ["photo"]=> array(5)
-{ ["name"]=> string(5) "1.png" ["type"]=> string(9) "image/png" ["tmp_name"]=> string(14)
- "/tmp/phpKM9ySR" ["error"]=> int(0) ["size"]=> int(76436) }
-} */
+?>

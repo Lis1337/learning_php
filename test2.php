@@ -1,6 +1,7 @@
 <?php
-session_start();
+require __DIR__ . '/test.php';
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,16 +12,13 @@ session_start();
     <title>Document</title>
 </head>
 <body>
-    <?php
-    echo 'Welcome to the main page, ' . $_SESSION['username'] . '!' . "<br>";
-    ?>
+<?php
 
-    <p>
-    <form action="../photo/show_gallery.php" method="get">
-        <button type="submit">
-            <label>Show gallery</label>
-        </button>
-    </form>
+    $table = new Table;
+    $table->color = 'blue';
+    $table->setPrice('500$');
 
+    echo $table->show();
+?>
 </body>
 </html>
