@@ -9,7 +9,7 @@
 </head>
 <body>
 <p>
-<form action="upload.php" method="post" enctype="multipart/form-data">
+<form action="../uploader.php" name="upload" method="post" enctype="multipart/form-data">
     <input type="file" name="photo">
     <button type="submit">Upload</button>
 </form>
