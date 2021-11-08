@@ -1,9 +1,16 @@
 <?php
-
 class GuestBook
 {
     protected string $bookDirectory = __DIR__ . '/guest_book.txt';
     protected array $book = [];
+    public function __construct()
+    {
+        $this->fillBook();
+        if ($this->book != null && array_key_first($this->book) == null) {
+            array_pop($this->book);
+        }
+    }
+
     protected function fillBook()
     {
         if (is_readable($this->bookDirectory)) {
@@ -12,20 +19,10 @@ class GuestBook
                 array_push($this->book, fgets($handle));
             }
             fclose($handle);
-        } else {return 'cannot read file';}
-    }
-
-    public function __construct()
-    {
-        $this->fillBook();
-        if ($this->book[0] == null) {
-            array_pop($this->book);
+        } else {
+            echo 'cannot read file';
+            die;
         }
-    }
-
-    public function getData(): array
-    {
-        return $this->book;
     }
 
     protected function getNumber(): int
@@ -35,9 +32,14 @@ class GuestBook
         } else {
             $arr = $this->book;
             $lastElement = $arr[array_key_last($arr)];
-            $num = explode('. ', $lastElement)[0];
-            return $num;
+            $lastString = explode('. ', $lastElement);
+            return $lastString[array_key_first($lastString)];
         }
+    }
+
+    public function getData(): array
+    {
+        return $this->book;
     }
 
     public function append($text)
@@ -51,16 +53,3 @@ class GuestBook
         file_put_contents($this->bookDirectory, $bookSeparated);
     }
 }
-
-$book = new GuestBook();
-
-//var_dump($book->getData()[0] == null);
-
-
-$book->append('for the emperor!');
-
-print_r ($book->getData());
-
-$book->save();
-
-print_r ($book->getData());
