@@ -16,7 +16,7 @@
 </p>
 
 <p>
-<form action="show_gallery.php" method="get" enctype="text/plain">
+<form action="temp/show_gallery.php" method="get" enctype="text/plain">
     <button type="submit">Show gallery</button>
 </form>
 </p>
