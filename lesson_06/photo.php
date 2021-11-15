@@ -9,14 +9,14 @@
 </head>
 <body>
 <p>
-<form action="../uploader.php" name="upload" method="post" enctype="multipart/form-data">
+<form action="uploader.php" method="post" enctype="multipart/form-data">
     <input type="file" name="photo">
     <button type="submit">Upload</button>
 </form>
 </p>
 
 <p>
-<form action="show_gallery.php" method="get" enctype="text/plain">
+<form action="temp/show_gallery.php" method="get" enctype="text/plain">
     <button type="submit">Show gallery</button>
 </form>
 </p>
